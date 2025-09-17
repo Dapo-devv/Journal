@@ -1,5 +1,5 @@
 import { Tabs } from "expo-router";
-import { SymbolView } from "expo-symbols";
+import { Ionicons } from "@expo/vector-icons";
 import { View } from "react-native";
 
 const AuthLayout = () => {
@@ -7,63 +7,72 @@ const AuthLayout = () => {
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: "white",
+        tabBarActiveTintColor: "#fff",
+        tabBarInactiveTintColor: "#9CA3AF",
         tabBarStyle: {
           backgroundColor: "#111827",
-          height: 80,
+          height: 78,
           borderTopWidth: 0,
+          paddingBottom: 12,
+          paddingTop: 8,
         },
-        tabBarIconStyle: {},
       }}
     >
+      {/* HOME */}
       <Tabs.Screen
         name="home"
         options={{
           tabBarLabel: "",
           tabBarIcon: ({ color }) => (
-            <SymbolView name="house.circle" size={35} tintColor={color} />
+            <Ionicons name="home-outline" size={30} color={color} />
           ),
         }}
       />
 
+      {/* CREATE (Floating Action) */}
       <Tabs.Screen
         name="create"
         options={{
           tabBarLabel: "",
-          tabBarIcon: ({}) => (
+          tabBarIcon: ({ focused }) => (
             <View
               style={{
-                backgroundColor: "#1F2937",
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: focused ? "#10B981" : "#1F2937",
                 borderRadius: 40,
-                padding: 8,
-                marginBottom: 20, // lifts it above the tab bar
+                width: 64,
+                height: 64,
+                marginBottom: 20, // lift above bar
                 shadowColor: "#000",
                 shadowOpacity: 0.3,
-                shadowOffset: { width: 0, height: 2 },
-                shadowRadius: 4,
-                elevation: 5, // Android shadow
+                shadowOffset: { width: 0, height: 4 },
+                shadowRadius: 6,
+                elevation: 6,
               }}
             >
-              <SymbolView
-                name="plus.circle"
-                size={44}
-                // icon color inside the green circle
+              <Ionicons
+                name="add-circle"
+                size={40} // bigger icon for clear visibility
+                color={focused ? "#fff" : "#9CA3AF"}
               />
             </View>
           ),
         }}
       />
 
+      {/* SETTINGS */}
       <Tabs.Screen
         name="settings"
         options={{
           tabBarLabel: "",
           tabBarIcon: ({ color }) => (
-            <SymbolView name="gearshape" size={35} tintColor={color} />
+            <Ionicons name="person-circle-outline" size={30} color={color} />
           ),
         }}
       />
     </Tabs>
   );
 };
+
 export default AuthLayout;

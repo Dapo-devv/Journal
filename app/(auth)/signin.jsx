@@ -1,4 +1,12 @@
-import { Alert, Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import React, { useState } from "react";
 import SafeAreaView from "react-native-safe-area-view";
 import CustomInput from "../../components/input";
@@ -20,15 +28,12 @@ const Signin = () => {
       setError("Please input email and password");
       return;
     }
-
     try {
       setLoading(true);
-
       await signInWithEmailAndPassword(auth, email.trim(), password);
       router.replace("/(tabs)/home");
-    } catch (error) {
-      setError(error.message);
-      console.log("Something went wrong", error);
+    } catch (err) {
+      setError(err.message);
     } finally {
       setLoading(false);
     }
@@ -36,50 +41,61 @@ const Signin = () => {
 
   return (
     <SafeAreaView style={styles.screen}>
-      {loading ? (
-        <LoadingScreen />
-      ) : (
-        <ScrollView>
-          <View style={styles.container}>
-            <Image
-              source={require("../../assets/images/login.png")}
-              resizeMode="contain"
-              style={styles.image}
-            />
-            <Text style={styles.header}>Welcome Back</Text>
-            <View style={styles.inputContainer}>
-              <CustomInput
-                label="email"
-                placeholder="Enter email"
-                placeholderTextColor="#9CA3AF"
-                value={email}
-                onChangeText={setEmail}
-                keyboardType="email-address"
-                autoCapitalize="none"
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={Platform.OS === "ios" ? 60 : 60}
+      >
+        {loading ? (
+          <LoadingScreen />
+        ) : (
+          <ScrollView
+            contentContainerStyle={styles.scrollContainer}
+            keyboardShouldPersistTaps="handled"
+          >
+            <View style={styles.container}>
+              <Image
+                source={require("../../assets/images/login.png")}
+                resizeMode="contain"
+                style={styles.image}
               />
-              <CustomInput
-                label="password"
-                placeholder="Enter password"
-                placeholderTextColor="#9CA3AF"
-                secureTextEntry={true}
-                value={password}
-                onChangeText={setPassword}
-                autoCapitalize="none"
-              />
-            </View>
+              <Text style={styles.header}>Welcome Back</Text>
 
-            <Button title="Sign in" onPress={handleLogin} />
-            {error ? <Text style={styles.error}>{error}</Text> : null}
+              <View style={styles.inputContainer}>
+                <CustomInput
+                  label="email"
+                  placeholder="Enter email"
+                  placeholderTextColor="#9CA3AF"
+                  value={email}
+                  onChangeText={setEmail}
+                  keyboardType="email-address"
+                  autoCapitalize="none"
+                />
+                <CustomInput
+                  label="password"
+                  placeholder="Enter password"
+                  placeholderTextColor="#9CA3AF"
+                  secureTextEntry
+                  value={password}
+                  onChangeText={setPassword}
+                  autoCapitalize="none"
+                />
+              </View>
 
-            <View style={styles.signupContainer}>
-              <Text style={styles.signupText}>Don't have account?</Text>
-              <Link href="/signup" style={{ marginLeft: 5 }}>
-                <Text style={styles.linkText}>Sign up</Text>
-              </Link>
+              <Button title="Sign in" onPress={handleLogin} />
+
+              {error ? <Text style={styles.error}>{error}</Text> : null}
+
+              <View style={styles.signupContainer}>
+                <Text style={styles.signupText}>Don't have account?</Text>
+                <Link href="/signup" style={{ marginLeft: 5 }}>
+                  <Text style={styles.linkText}>Sign up</Text>
+                </Link>
+              </View>
             </View>
-          </View>
-        </ScrollView>
-      )}
+          </ScrollView>
+        )}
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };
@@ -91,32 +107,36 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#111827",
   },
+  scrollContainer: {
+    flexGrow: 1,
+    justifyContent: "center",
+    paddingBottom: 20,
+  },
   container: {
-    flex: 1,
-    padding: 10,
+    paddingHorizontal: 16,
   },
   header: {
     color: "#F9FAFB",
     fontWeight: "bold",
     fontSize: 30,
     textAlign: "center",
-    marginTop: 70,
+    marginTop: 40,
+    marginBottom: 20,
   },
   inputContainer: {
-    marginTop: 30,
-    marginHorizontal: 10,
+    marginVertical: 20,
   },
   image: {
-    width: 400,
-    height: 200,
+    width: "100%",
+    height: 180,
+    alignSelf: "center",
   },
   signupText: {
     color: "white",
   },
   signupContainer: {
     flexDirection: "row",
-    marginTop: 10,
-    alignItems: "center",
+    marginTop: 16,
     justifyContent: "center",
   },
   linkText: {
@@ -126,5 +146,6 @@ const styles = StyleSheet.create({
   error: {
     color: "red",
     marginTop: 10,
+    textAlign: "center",
   },
 });

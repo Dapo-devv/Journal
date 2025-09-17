@@ -12,15 +12,12 @@ const firebaseConfig = {
   appId: "1:990526121955:web:785facc3151d31d797a2d6",
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Initialize Auth with AsyncStorage persistence
+// ✅ Correct way for Expo/React Native
 const auth = initializeAuth(app, {
   persistence: getReactNativePersistence(AsyncStorage),
 });
 
-// Initialize Firestore
 const db = getFirestore(app);
-
 export { app, auth, db };
