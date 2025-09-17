@@ -1,72 +1,30 @@
-<<<<<<< HEAD
-# Welcome to your Expo app 👋
+# 📝 Journal App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A cross-platform journaling application built with **React Native**.  
+Users can create, edit, and delete daily reflections, manage their profile, and enjoy a clean dark UI.
 
-## Get started
-
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
-=======
-# Journal App
-
-A cross-platform journaling app built with React Native and Expo.  
-Users can create, edit, and delete daily reflections, get random writing prompts, and manage their profile.
+---
 
 ## ✨ Features
-- Create, edit, and delete personal notes
-- Random title/content prompts
-- Profile editing with image upload
-- Firebase Authentication & Firestore
-- Dark UI with safe-area support
-- Logout functionality
+- Create, edit, and delete personal notes  
+- Random writing prompts for inspiration  
+- User authentication (signup / signin / logout)  
+- Profile editing with display name  
+- Dark theme with safe-area support  
+- Firebase Firestore for secure data storage
+
+---
 
 ## 🛠 Tech Stack
-- **React Native / Expo 54**
-- **Expo Router** for navigation
-- **Firebase Auth & Firestore**
-- **Expo Image Picker**
->>>>>>> c2b6a7da9cd76ce2442bbd66aed94dd62f489f2a
-# Journal
+- **React Native** (with Expo runtime for development convenience)  
+- **Expo Router** for navigation  
+- **Firebase Authentication & Firestore**  
+- AsyncStorage for persistent login
+
+---
+
+## 🚀 Getting Started
+
+1. **Install dependencies**
+   ```bash
+   npm install
